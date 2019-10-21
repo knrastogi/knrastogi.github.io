@@ -1,0 +1,853 @@
+--- MDX Cube Queries ---
+-- Execute one query at a time
+
+select [Measures].[Sales Time Alt Key] on columns from [Sales DW Cube];
+
+--select [Measures].[Quantity] on columns from [Sales DW Cube];--
+
+--select [Measures].[Sales Invoice Number] on columns from [Sales DW Cube];
+
+--select [Measures].[Sales Total Cost] on columns from [Sales DW Cube];
+
+--select [Measures].[Sales Total Cost] on columns, [Dim Date].[Year].[Year] on rows from [Sales DW Cube];
+
+--select [Measures].[Sales Total Cost] on columns, NONEMPTY({[Dim Date].[Year].[Year]}) on rows from [Sales DW Cube];
+
+--select [Measures].[Sales Total Cost] on columns from [Sales DW Cube] Where [Dim Date].[Year].[Year].&[2013]
+
+
+
+
+
+--- Classification Timeseries Rainfall ---
+# Get the data points in form of a R vector.
+rainfall <- c(799,1174.8,865.1,1334.6,635.4,918.5,685.5,998.6,784.2,985,882.8,1071)
+
+# Convert it to a time series object.
+rainfall.timeseries <- ts(rainfall,start = c(2012,1),frequency = 12)
+
+# Print the timeseries data.
+print(rainfall.timeseries)
+
+# Give the chart file a name.
+png(file = "rainfall.png")
+
+# Plot a graph of the time series.
+plot(rainfall.timeseries)
+
+# Save the file.
+# dev.off()
+
+
+
+
+
+--- Classification Decision Tree Reading Skills ---
+install.packages("party")
+
+# Load the party package. It will automatically load other
+# dependent packages.
+library(party)
+
+# Print some records from data set readingSkills.
+print(head(readingSkills))
+
+# Create the input data frame.
+input.dat <- readingSkills[c(1:105),]
+
+# Give the chart file a name.
+# png(file = "decision_tree.png")
+
+# Create the tree.
+output.tree <- ctree(
+nativeSpeaker ~ age + shoeSize + score,
+data = input.dat
+)
+
+# Plot the tree.
+plot(output.tree)
+
+# Save the file.
+# dev.off()
+
+
+
+
+
+--- Classification Decision Tree Iris dataset ---
+install.packages("party")
+library(party)
+
+str(iris)
+set.seed(1234)
+ind <- sample(2, nrow(iris), replace=TRUE, prob=c(0.7, 0.3))
+trainData <- iris[ind==1,]
+testData <- iris[ind==2,]
+
+myFormula <- Species ~ Sepal.Length + Sepal.Width + Petal.Length + Petal.Width
+iris_ctree <- ctree(myFormula, data=trainData)
+# check the prediction
+table(predict(iris_ctree), trainData$Species)
+
+print(iris_ctree)
+
+plot(iris_ctree)
+# plot(iris_ctree, type="simple")
+
+# predict on test data
+testPred <- predict(iris_ctree, newdata = testData)
+table(testPred, testData$Species)
+
+
+
+
+
+--- Clustering kmeans iris dataset ---
+require("datasets")
+data("iris") # load Iris Dataset
+str(iris) #view structure of dataset
+summary(iris) #view statistical summary of dataset
+head(iris) #view top  rows of dataset
+iris.new<- iris[,c(1,2,3,4)]
+iris.class<- iris[,"Species"]
+head(iris.new)
+head(iris.class)
+normalize <- function(x){
+  return ((x-min(x))/(max(x)-min(x)))
+}
+iris.new$Sepal.Length<- normalize(iris.new$Sepal.Length)
+iris.new$Sepal.Width<- normalize(iris.new$Sepal.Width)
+iris.new$Petal.Length<- normalize(iris.new$Petal.Length)
+iris.new$Petal.Width<- normalize(iris.new$Petal.Width)
+head(iris.new)
+result <- kmeans(iris.new,3) #apply k-means algorithm with no. of centroids(k)=3
+result$size # gives no. of records in each cluster
+result$centers # gives value of cluster center datapoint value(3 centers for k=3)
+result$cluster #gives cluster vector showing the custer where each record falls
+par(mfrow=c(2,2), mar=c(5,4,2,2))
+plot(iris.new[c(1,2)], col=result$cluster)# Plot to see how Sepal.Length and Sepal.Width data points have been distributed in clusters
+plot(iris.new[c(1,2)], col=iris.class)# Plot to see how Sepal.Length and Sepal.Width data points have been distributed originally as per "class" attribute in dataset
+plot(iris.new[c(3,4)], col=result$cluster)# Plot to see how Petal.Length and Petal.Width data points have been distributed in clusters
+plot(iris.new[c(3,4)], col=iris.class)
+table(result$cluster,iris.class)
+
+
+
+
+
+--- Clustering kmeans iris dataset small code ---
+#apply K means to iris and store result
+newiris <- iris
+newiris$Species <- NULL
+(kc <- kmeans(newiris,3))
+
+#Compare the Species label with the clustering result
+table(iris$Species,kc$cluster)
+
+#Plot the clusters and their centers
+plot(newiris[c("Sepal.Length","Sepal.Width")],col=kc$cluster)
+points(kc$centers[,c("Sepal.Length","Sepal.Width")],col=1:3,pch=8,cex=2)
+#dev.off()
+
+#Plot the clusters and their centre
+plot(newiris[c("Sepal.Length","Sepal.Width")],col=kc$cluster)
+
+
+
+
+
+--- Linear regression height weight ---
+# Create the predictor and response variable.
+x <- c(151, 174, 138, 186, 128, 136, 179, 163, 152, 131)
+y <- c(63, 81, 56, 91, 47, 57, 76, 72, 62, 48)
+relation <- lm(y~x)
+print(summary(relation))
+
+# Find weight of a person with height 170.
+a <- data.frame(x = 170)
+result <- predict(relation,a)
+print(result)
+
+# Give the chart file a name.
+# png(file = "linearregression.png")
+# Plot the chart.
+plot(y,x,col = "blue",main = "Height & Weight Regression",
+abline(lm(x~y)),cex = 1.3,pch = 16,xlab = "Weight in Kg",ylab = "Height in cm")
+#Save the file
+#dev.off()
+
+
+
+
+
+--- Linear regression iris dataset ---
+#1. Load and view dataset
+require("datasets")
+data("iris")
+str(iris)
+head(iris)
+
+#2. Preprocess the dataset
+Y<- iris[,"Sepal.Width"] # select Target attribute
+X<- iris[,"Sepal.Length"] # select Predictor attribute
+head(X)
+
+#3. Find correlation between “Sepal.Length” and “Sepal.Width” by applying Least Squares Linear Regression Model
+xycorr<- cor(Y,X, method="pearson") # find pearson correlation coefficient
+xycorr # a value near 1 implies high correlation and that near 0 shows low correlation
+
+plot(Y~X, col=X)
+model1<- lm(Y~X)
+model1 # provides regression line coefficients i.e. slope and y-intercept
+
+plot(Y~X, col=X) # scatter plot between X and Y
+abline(model1, col="blue", lwd=3) # add regression line to scatter plot to see relationship between X and Y
+
+#4. Check correlation between “Petal.Length” and “Petal.Width” by applying Least Squares Linear Regression Model
+U<- iris[,"Petal.Width"] # select Target
+V<- iris[,"Petal.Length"] # select Predictor
+xycorr<- cor(U,V, method="pearson")
+xycorr
+
+plot(U~V, col=V)
+model2<- lm(U~V)
+model2
+
+plot(U~V, col=V) # scatter plot between U and V
+abline(model2, col="blue", lwd=3) # add regression line to scatter plot to see relationship between U and V
+
+#4. Perform prediction
+# Prediction of 'Sepal.Width' when 'Sepal.Length'= 20
+p1<- predict(model1,data.frame("X"=20))
+p1
+
+# Prediction of 'Petal.Width' when 'Petal.Length'= 15
+p2<- predict(model2,data.frame("V"=15))
+p2
+
+
+
+
+--- Linear regression power bi measures --- 
+XSum = SUM(Table1[Age(X)])
+YSum = SUM(Table1[Sales(Y)])
+XYSum = SUM(Table1[XY])
+XSquareSum = SUM(Table1[XSquare])
+YSquareSum = SUM(Table1[YSquare])
+rnumerator = (10*[XYSum])-([XSum]*[YSum])
+rdenomenator1 = ((10*[XSquareSum])-([XSum]^2))*((10*[YSquareSum])-([YSum]^2))
+rdenomenator2 = SQRT([rdenomenator1])
+r = [rnumerator]/[rdenomenator2]
+rSquared = [r]*[r]
+yintercept = (([YSum]*[XSquareSum])-([XSum]*[XYSum]))/((10*[XSquareSum])-([XSum]^2))
+slope=(10*[XYSum]-([XSum]*[YSum]))/(10*[XSquareSum]-([XSum]^2))
+n = 10
+nsales = ([n]*[slope])+[yintercept]
+10Sales = [slope]*10+[yintercept]
+30Sales = [slope]*30+[yintercept]
+50Sales = [slope]*50+[yintercept]
+
+
+
+
+
+--- Customer databases query ---
+create database CustomerOLTP
+go
+
+use CustomerOLTP
+go
+
+create table CustOLTP 
+(
+custid varchar(5),
+custname varchar(50),
+address varchar(100),
+sal int
+)
+go
+
+insert into CustOLTP (custid, custname, address, sal)values
+('dcu1','bruce','churchgate',8500000),
+('dcu2','clark','mahim',175000),
+('dcu3','robert','dadar',3600000),
+('dcu4','oliver','churchgate',6600000),
+('dcu5','barry','andheri',150000),
+('dcu6','iris','andheri',75000),
+('dcu7','overwatch','dadar',250000),
+('dcu8','felicity','churchgate',200000),
+('mcu1','tony','churchgate',9800000),
+('mcu2','pepper','dadar',750000),
+('mcu3','thor','andheri',5000000),
+('mcu4','billy','mahim',150000),
+('dcu9','wally','borivali',250000),
+('mcu5','peter','borivali',50000),
+('dcu10','diana','mahim',3400000),
+('mcu6','marvel','dadar',4850000),
+('dcu11','victor','borivali',4500000),
+('dcu12','lois','mahim',275000),
+('dcu13','robin','churchgate',175000),
+('dcu14','eobard','andheri',6500000);
+go
+
+create database CustomerStaging
+go
+
+use CustomerStaging
+go
+
+create table Custstaging 
+(
+custid varchar(5),
+custname varchar(50),
+address varchar(100),
+salINR int
+)
+go
+
+insert into Custstaging (custid, custname, address, salINR)
+select custid, custname, address, sal from CustomerOLTP.dbo.CustOLTP
+go
+
+create database CustomerDW
+go
+
+use CustomerDW
+go
+
+create table CustDW
+(
+cid varchar(5),
+cname varchar(50),
+address varchar(100),
+salINR int,
+salDollar int
+)
+go
+
+use CustomerStaging
+go
+
+update Custstaging
+set custid = UPPER(custid), custname = UPPER(custname)
+go
+
+alter table Custstaging
+add salDollar int
+go
+
+update Custstaging
+set salDollar = salINR/70
+go
+
+select * from Custstaging
+go
+
+
+
+
+
+
+--- MDX queries adventureworks adventure works ---
+--Type Your MDX Query Here and run against Adventure Works  Cube
+
+--Select Dimension.Member on column 
+--From OLAPCubeName
+
+Select [Customer].[Customer].[Customer] on 0 
+From [Adventure Works];
+--OR
+Select [Customer].[Customer].[Customer] on columns 
+From [Adventure Works];
+--Retrieve Internet Average Sales Amount as per Product Category
+Select [Measures].[Internet Average Sales Amount] on Columns,
+[Product].[Category].children on Rows
+From [Adventure Works];
+
+-- writing tuple
+select {[Date].[CY 2005], [Date].[CY 2006] , [Date].[CY 2007]} on rows,
+[Measures].[Internet Sales Amount] on columns from
+[Adventure Works];
+--Writing Set
+select {[Date].[CY 2008] : [Date].[CY 2005]}  on rows,
+[Measures].[Internet Sales Amount] on columns from
+[Adventure Works];
+
+
+-- Using Cross Join symbol *
+select {[Product].[Category].children*[Product].[Subcategory].children * [Product].[Product].children } on rows,
+[Measures].[Internet Sales Amount] on columns from
+[Adventure Works];
+
+--Using Non Empty to remove Null values from result set
+Select 
+non empty CrossJoin([Product].[Category].children,[Product].[Subcategory].children,
+[Product].[Product].children) on rows,
+{[Measures].[Internet Sales Amount],[Measures].[Internet Freight Cost]} on columns 
+from [Adventure Works];
+
+-- View Aggregation value of Total Internet  Sales for All Periods
+select [Measures].[Internet Sales Amount] on columns,
+[Date].[Month of Year] on rows
+from [Adventure Works];
+
+
+-- View Aggregated value of Internet sales Amount Monthwise with [All].
+select [Measures].[Internet Sales Amount] on columns,
+[Date].[Month of Year].members on rows
+from [Adventure Works];
+
+-- View Aggregated value of Internet sales Amount day name wise with [All].
+select [Measures].[Internet Sales Amount] on columns,
+[Date].[Day Name].members on rows
+from [Adventure Works];
+
+-- Internet sales Amount Monthwise  without Allperiods/ exclude [All].
+select [Measures].[Internet Sales Amount] on columns,
+[Date].[Month of Year].Children on rows
+from [Adventure Works];
+
+-- Internet sales Amount Monthwise e.g all January, February etc..
+select [Measures].[Internet Sales Amount] on columns,
+[Date].[Month of Year].children on rows
+from [Adventure Works];
+
+
+-- Internet sales Amount Year & Monthwise e.g [All], 2005-January, 2005-February etc with All Periods..
+select [Measures].[Internet Sales Amount] on columns,
+[Date].[Calendar Year].members*[Date].[Month of Year].members on rows
+from [Adventure Works];
+
+--Internet sales Amount Year & Monthwise (avoid All Member [All] and use dimension members from hierarchy )
+select [Measures].[Internet Sales Amount] on columns,
+{[Date].[Calendar Year].children*[Date].[Month of Year].children } on rows
+from [Adventure Works];
+
+-- Display only those whose sales amount >473389.16 using filter
+select [Measures].[Internet Sales Amount] on columns,
+filter({[Date].[Calendar Year].children*[Date].[Month of Year].children },([Measures].[Internet Sales Amount]>473389.16)) on rows
+from [Adventure Works];
+
+select [Measures].[Internet Sales Amount] on columns,
+filter({[Date].[Calendar Year].children*[Date].[Month of Year].children*[Customer].[Customer].[Customer].members },([Measures].[Internet Sales Amount]>489.16)) on rows
+from [Adventure Works];
+
+//
+//select [Measures].[Internet Sales Amount] on columns,
+//filter({[Date].[Calendar Year].children*[Date].[Month of Year].children*[Customer].[Customer].[Customer].members },([Customer].[Customer].&[27663])) on rows
+//from [Adventure Works];
+
+select [Measures].[Internet Sales Amount] on columns,
+[Date].[Calendar].members*[Date].[Month of Year].members*[Customer].[Customer].[Customer].members  on rows
+from [Adventure Works];
+
+--show all customers who has purchase amount >5000 in any month over all years
+
+select [Measures].[Internet Sales Amount] on columns,
+filter({[Date].[Calendar Year].children*[Date].[Month of Year].children*[Customer].[Customer].[Customer].members },([Measures].[Internet Sales Amount]>5000)) on rows
+from [Adventure Works];
+
+--year 2007 and sales amount>4000, but can't use hirarchy year on axis
+
+select [Measures].[Internet Sales Amount] on columns,
+filter({[Date].[Month of Year].children*[Customer].[Customer].[Customer].members },([Measures].[Internet Sales Amount]>4000)) on rows
+from [Adventure Works]
+where [Date].[Calendar Year].[CY 2007]
+;
+
+--Year 2007 and sales amount>4000, we can use hirarchy year on axis 
+select [Measures].[Internet Sales Amount] on columns,
+filter({[Date].[Calendar Year].children*[Date].[Month of Year].children*[Customer].[Customer].[Customer].members },([Measures].[Internet Sales Amount]>4000)) on rows
+from 
+(select [Date].[Calendar Year].[CY 2007] on columns from [Adventure Works]);
+
+--Compare All March and April Sales for all years
+
+select [Measures].[Internet Sales Amount] on columns,
+[Date].[Calendar].children*{[Date].[Month of Year].[March],[Date].[Month of Year].[April] } on rows
+from [Adventure Works];
+
+-- Remove empty cells from measures or remove all those month which does not have any sales
+select  [Measures].[Internet Sales Amount] on columns,
+nonempty ([Date].[Calendar].children*{[Date].[Month of Year].[March],[Date].[Month of Year].[April] } )on rows
+from [Adventure Works];
+
+--Sales value of first Month 
+
+select  [Measures].[Internet Sales Amount] on columns,
+{[Date].[Calendar Year].children*openingPeriod([Date].[Calendar].[Month])} on rows
+from [Adventure Works];
+
+--Opening period(Starting Month) of particular year
+select  [Measures].[Internet Sales Amount] on columns,
+{[Date].[Calendar Year].children*OpeningPeriod([Date].[Calendar].[Month],[Date].[Calendar].[Calendar Year].&[2005])} on rows
+from [Adventure Works];
+
+-- Calculate Profit margin (InternetSalesAmount-InternetTotalProductCost) using member
+with member Profitmargin as
+([Measures].[Internet Sales Amount]-[Measures].[Internet Total Product Cost])
+select Profitmargin on columns,
+[Date].[Calendar].[Date].ALLMEMBERS on rows 
+from [Adventure Works];
+
+-- Last 6 Month Details of Sales for year 2007
+select [Measures].[Internet Sales Amount]  on columns,
+LastPeriods(6,[Date].[Calendar].[Month].[December 2007]) on rows
+from [Adventure Works] ;
+
+-- sort data in descending order of sales amount for Last 6 Month Details of Sales for year 2007
+select [Measures].[Internet Sales Amount]  on columns,
+order(LastPeriods(6,[Date].[Calendar].[Month].[December 2007]),[Measures].[Internet Sales Amount],Desc)  on rows
+from [Adventure Works] ;
+
+--find out top/highest 5 sales amount
+
+select  [Measures].[Internet Sales Amount] on columns,
+TopCount([Date].[Calendar].[Month],5,[Measures].[Internet Sales Amount] ) on rows
+from [Adventure Works];
+
+--find out bottom/lowest 5 sales amount, avoid empty months using nonempty function
+select  [Measures].[Internet Sales Amount] on columns,
+(BottomCount(nonempty( [Date].[Calendar].[Month]),5,[Measures].[Internet Sales Amount] ) ) on rows
+from [Adventure Works];
+
+-- findout 100 customer who has done highest purchase
+
+select  [Measures].[Internet Sales Amount] on columns,
+TopCount({[Date].[Calendar].[Month]*[Customer].[Customer].[Customer]} ,100,[Measures].[Internet Sales Amount] ) on rows
+from [Adventure Works];
+
+-- Findout top 10 customer who has done highest purchase of the august 2008
+
+select  [Measures].[Internet Sales Amount] on columns,
+TopCount(nonempty([Customer].[Customer].[Customer] ),10,[Measures].[Internet Sales Amount] ) on rows
+from [Adventure Works]
+where 
+[Date].[Calendar].[Month].[July 2008];
+
+--using properties of the dimension on axis
+
+select {} 
+on columns,
+{[Customer].[Customer Geography].[State-Province].members } dimension properties 
+member_Caption  on rows 
+from [Adventure Works];
+
+--creation of custom member as per the requirement
+
+WITH MEMBER  [MEASURES].[T2] AS 
+[Customer].[State-Province].CURRENTMEMBER.UNIQUE_NAME
+MEMBER  [MEASURES].[T3] AS 
+[Customer].[State-Province].CURRENTMEMBER.MEMBER_cAPTION
+MEMBER  [MEASURES].[T4] AS 
+[Customer].[State-Province].CURRENTMEMBER.UNIQUENAME
+select {[MEASURES].[T2] ,[MEASURES].[T3] ,[MEASURES].[T4] }
+on 0,
+[Customer].[Customer Geography].[State-Province].members DIMENSION PROPERTIES UNIQUE_NAME,MEMBER_KEY  on 1 
+from [Adventure Works];
+
+
+
+WITH MEMBER  [MEASURES].[T1] AS 
+[Employee].[Employees].CURRENTMEMBER.UNIQUE_NAME
+SELECT [MEASURES].[T1] ON 0
+,
+[Employee].[Employees].MEMBERS DIMENSION PROPERTIES UNIQUE_NAME,MEMBER_KEY ON 1 FROM [Adventure Works];
+
+
+  --custom calculated testmember to do sum/aggregate upto specified month
+with member testmember as 
+Aggregate
+(
+YTD([Date].[Calendar].[Month].&[2006]&[2]), [Measures].[Internet Sales Amount]
+)
+select {testmember,[Measures].[Internet Sales Amount]} on columns,
+--existing places filter on members of month for specified year
+existing
+(
+    [Date].[Calendar].[Month].MEMBERS ,[Date].[Calendar Year].&[2006]
+
+)
+ on rows
+
+FROM [Adventure Works];
+
+// using periods to date for same purpose for doing some upto specified month or for doing running total as per different combination
+with member testmember as 
+Aggregate
+(
+PeriodsToDate([Date].[Calendar].[Calendar Year]), [Measures].[Internet Sales Amount]
+--PeriodsToDate( [Date].[Calendar].[Calendar Year] ,[Date].[Calendar].[Month].&[2006]&[3] ),[Internet Sales Amount]
+)
+select {testmember,[Measures].[Internet Sales Amount]} on columns,
+
+existing
+(
+    [Date].[Calendar].[Month].MEMBERS ,[Date].[Calendar Year].&[2006]
+
+)
+ on rows
+
+FROM [Adventure Works];
+
+
+
+SELECT
+  {
+    [Measures].[Internet Sales Amount]
+  } ON 0
+,
+[Date].[Date].[Date] on 1
+FROM [Adventure Works]
+where  [Date].[Calendar].[Month].&[2006]&[3]
+;
+
+SELECT
+  {
+    [Measures].[Internet Sales Amount]
+  } ON 0
+,
+[Date].[Date].[Date] on 1
+FROM [Adventure Works]
+where  [Date].[Calendar].[Month].&[2006]&[3]
+;
+
+SELECT
+[Measures].[Internet Sales Amount]   ON columns
+,{
+    LastPeriods(15     ,[Date].[Date].&[20050715] )
+    
+  } ON rows
+FROM [Adventure Works]
+
+;
+
+
+WITH
+  MEMBER one AS
+    Aggregate
+    (
+      YTD([Date].[Calendar].[Month].&[2006]&[2])  , [Measures].[Internet Sales Amount]
+    )
+  MEMBER two AS
+    Aggregate
+    (
+      PeriodsToDate
+      (   [Date].[Calendar].[Calendar Year] ,[Date].[Calendar].[Month].&[2006]&[3]  ) ,[Measures].[Internet Sales Amount]
+      )
+SELECT
+  {
+    one ,two ,[Measures].[Internet Sales Amount]
+  } ON 0
+ ,(EXISTING
+    (
+      [Date].[Calendar].[Month].MEMBERS
+     ,[Date].[Calendar Year].&[2006]
+    )) ON ROWS
+FROM [Adventure Works];
+
+--sum/aggregate upto specified month for that particular quarter
+with member qtdsample as 
+Aggregate
+(
+QTD([Date].[Calendar].[Month].&[2006]&[5]),[Internet Sales Amount]
+)
+select  {qtdsample, [Internet Sales Amount]} on columns,
+(EXISTING
+    (
+        [Date].[Calendar].[Month].MEMBERS  ,[Date].[Calendar Year].&[2006]
+
+    )) ON ROWS
+ from [Adventure Works];
+ 
+SELECT 
+  {[Measures].[Internet Sales Amount]} ON COLUMNS
+ ,ParallelPeriod
+  (
+    [Date].[Calendar].[Calendar Quarter]   ,1   ,[Date].[Calendar].[Month].&[2006]&[4]
+  ) ON ROWS
+FROM [Adventure Works];
+
+SELECT 
+  {[Measures].[Internet Sales Amount]} ON 1
+ ,{
+    --Current Month 
+    StrToMember
+    ("[Date].[Calendar].[Month].["   +    Format (  Now() - 7 * 365 ,"MMMM yyyy"  )   + "]"
+    )
+    --,StrToMember("[Date].[Calendar].[Month].[" + Format(now()-(7*365), "MMMM yyyy") + "]") 
+   ,ParallelPeriod
+    (
+      [Date].[Calendar].[Month]    ,-1
+    )
+  } ON 0
+FROM [Adventure Works];
+
+select   {[Measures].[Internet Sales Amount]} ON 1,
+existing
+(
+[Date].[Calendar].[Month].members  ,[Date].[Calendar Year].&[2006]
+) on 0
+FROM [Adventure Works];
+ 
+ 
+ SELECT 
+  {[Measures].[Internet Sales Amount]} ON 1
+ ,{
+    /* First Day of the month */
+    Closingperiod
+    (
+    [Date].[Calendar].[Date]  ,StrToMember ("[Date].[Calendar].[Month].["   + 
+	Format (  Now() - 7 * 365  ,"MMMM yyyy"  ) + "]"
+      )
+    )
+  } ON 0
+FROM [Adventure Works];
+
+
+SELECT 
+  {[Measures].[Internet Sales Amount]} ON 1
+ ,{
+    LastPeriods
+    (2
+     ,StrToMember
+      ("[Date].[Calendar].[Month].["
+          + 
+            Format
+            (
+              Now() - 7 * 365
+             ,"MMMM yyyy"
+            )
+        + "]"
+      )
+    )
+  } ON 0
+FROM [Adventure Works];
+
+
+SELECT
+  {[Date].[Calendar Year].[Calendar Year]}*{
+    --[Internet Order Count],
+    [Measures].[Internet Sales Amount]
+  } ON COLUMNS
+ ,Order
+  (
+    [Sales Territory].[Sales Territory Region].MEMBERS
+   ,[Measures].[Internet Sales Amount]
+   ,DESC
+  ) ON ROWS
+FROM [Adventure Works];
+
+
+SELECT
+  {
+  [Date].[Calendar Year].[Calendar Year]*[Date].[Calendar].[Month]}*{
+    --[Internet Order Count],
+    [Measures].[Internet Sales Amount]
+  } ON COLUMNS
+ ,
+ FILTER( 
+
+
+    [Sales Territory].[Sales Territory Region]   ,[Internet Sales Amount] > 500000)  ON ROWS
+FROM [Adventure Works];
+
+
+WITH
+  MEMBER [Internet Order Count 2006] AS
+    (
+      [Measures].[Internet Order Count]
+     ,[Date].[Calendar].[Calendar Year].&[2006]
+    )
+SELECT
+  [Internet Order Count 2006] ON COLUMNS
+ ,[Sales Territory].[Sales Territory Region].MEMBERS ON ROWS
+FROM [Adventure Works];
+
+--non empty
+WITH
+  MEMBER [Internet Order Count 2006] AS
+    (
+      [Measures].[Internet Order Count]
+     ,[Date].[Calendar].[Calendar Year].&[2006]
+    )
+SELECT
+  ( 
+  [Internet Order Count 2006]) ON COLUMNS
+ ,non empty[Sales Territory].[Sales Territory Region].MEMBERS ON ROWS
+FROM [Adventure Works];
+
+
+--nonempty()
+WITH
+  MEMBER [Internet Order Count 2006] AS
+    (
+      [Measures].[Internet Order Count]
+     ,[Date].[Calendar].[Calendar Year].&[2006]
+    )
+SELECT
+  ( 
+  [Internet Order Count 2006]) ON COLUMNS
+ ,nonempty([Sales Territory].[Sales Territory Region].MEMBERS) ON ROWS
+FROM [Adventure Works];
+
+
+WITH SET [2005_2006_Months] AS
+{[Date].[Calendar].[Calendar Year].&[2005].children
+,[Date].[Calendar].[Calendar Year].&[2006].children}
+SELECT [Measures].[Internet Sales Amount] on columns
+      ,ORDER([2005_2006_Months],[Measures].[Internet Sales Amount],BASC) on rows 
+  FROM [Adventure Works]  ;
+  
+  
+  
+SELECT 
+[Customer].[Country].Members * 
+[Customer].[State-Province].Members 
+ON 0, 
+Crossjoin( 
+[Date].[Calendar Year].Members, 
+[Product].[Category].[Category].Members) 
+ON 1 
+FROM [Adventure Works] 
+WHERE Measures.[Internet Sales Amount] ;
+
+//
+//select {[Dim Date].[Date Hierarchy].[Year].members ,[Dim Date].[Date Hierarchy].[Quarter Name].members} on 0 ,
+//{} on 1 from [SalesAnalyticalCube]
+
+--Query Example
+
+
+
+select [Measures].[Internet Sales Amount] on columns,
+[Product].[Product].[Product].members on rows
+from [Adventure Works]
+where {[Date].[Calendar Year].[CY 2007],[Date].[Calendar Year].[CY 2009]}
+
+go
+select  [Measures].[Internet Sales Amount] on columns,
+filter([Product].[Product].[Product].members ,
+[Measures].[Internet Sales Amount]>5000
+)
+on rows
+from [Adventure Works]
+where {[Date].[Calendar Year].[CY 2007]}
+
+go 
+
+select  [Measures].[Internet Sales Amount] on columns,
+filter([Product].[Product].[Product].members ,
+([Measures].[Internet Sales Amount]<19000 and left([Product].[Product].currentmember.name,1)="A")
+)
+on rows
+from [Adventure Works]
+where {[Date].[Calendar Year].[CY 2007]}
+
+go
+
+select  [Measures].[Internet Sales Amount] on columns,
+order([Product].[Product].[Product].members ,[Measures].[Internet Sales Amount],desc)
+on rows
+from [Adventure Works]
+where {[Date].[Calendar Year].[CY 2007]}
