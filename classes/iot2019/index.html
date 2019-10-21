@@ -1,1 +1,249 @@
 
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+		<!--<link rel="stylesheet" href="mystyle.css" type="text/css"> -->
+		<meta name="author" content="Amey Karkare and Amit Gupta">
+		<meta name="keywords" content="CS664, CS 664, IoT, Internet of Things">
+	<title> MIT2323C04: Internet of Things	 </title></head>
+	
+	<body style="background-image:url(shoe1.png)">
+<h1 id="cs664-iot-system-design-2018-summer-semester">MIT2323C04: Internet of Things (2019 Odd Semester)<a id="top"></a></h1><a id="top">
+<hr>
+</a><ul><a id="top">
+</a><li><a id="top"><strong>Instructor</strong>: </a><a href="http://www.cse.iitk.ac.in/users/karkare">K N Rastogi</a> (<a href="mailto:karkare@cse.iitk.ac.in">krishrastogi3@gmail.com</a>, <a href="mailto:karkare@gmail.com">karkare@gmail.com</a>)</li>
+<li><strong>Timings</strong>: Mon, Wed, Fri 1200 -- 1300 Hours</li>
+<li><strong>Venue</strong>: KD 102</li>
+<li><strong>TAs</strong>:</li>
+</ul>
+<hr>
+<p>The focus of this introductory course would be “the smart sensor 
+node” with emphasis on design, requirement, data interfacing and 
+capabilities. The course would cover engineering fundamentals, blended 
+with good industrial practices, which lead to the first-time success of 
+the design and development of sensor node. API development, cloud 
+computing, and data analysis would also be covered in brief. Lab 
+sessions and case studies will supplement the classroom interactions.</p>
+<p>After completing this course, students will be in a position to 
+understand various building blocks and working of state-of-the-art IoT 
+systems. Students would also gain enough insights to conceive and build 
+IoT systems on their own.</p>
+<ul>
+<li><a href="#ethics">Code of Ethics</a></li>
+<li><a href="#announcements">Announcements</a></li>
+<li><a href="#outline">Course Outline</a></li>
+<li><a href="#eval">Evaluation Scheme</a></li>
+<li><a href="#handouts">Topics covered and handouts</a></li>
+<li><a href="#labex">Lab exercises</a></li>
+<li><a href="#assignments">Assignments</a></li>
+<li><a href="#project">Course Project</a></li>
+<li><a href="#support">Supporting Material</a></li>
+<li><a href="#reading">Reading /Video Notes</a></li>
+<li><a href="#reference">References</a></li>
+</ul>
+<hr>
+<h2 id="code-of-ethics">Code of Ethics <a id="ethics"></a></h2><a id="ethics">
+<p>Any report/program/assignment you submit must <strong>clearly distinguish</strong> your contribution from others (webpages, softwares, report, discussions with other students). <font color="red">The penalty for copying in any form will be severe</font>.</p>
+<hr>
+</a><h2 id="announcements"><a id="ethics">Announcements </a><a id="announcements"></a></h2><a id="announcements">
+</a><ul><a id="announcements">
+</a><li><a id="announcements">Register on [</a><a href="https://canvas.cse.iitk.ac.in/courses/34">CS664 Canvas</a>]
+
+</li><li>[<a href="https://drive.google.com/open?id=1FoxqyIt0jxW5G4QKEHQ3xNKxG1Ikp0-S">Installation Manual</a>] (updated on June 8th, 2018) to interface with Oblu from your Laptop</li>
+<li>[<a href="https://drive.google.com/open?id=1DkY1HgqBuC-1lUDbyXYUiTwEHIXFTEeQ">Installation Manual</a>] (updated on June 11th, 2018) with minor updates based on interactions during lab sessions.</li>
+<li>Here is [<a href="https://docs.google.com/spreadsheets/d/1luIXOQbRj_Ay0TIeHnO03zP7xe3eayRctnY25S0DbMg/edit?usp=sharing">your attendance</a>]</li>
+<li>What comes below is a tentative plan for the course to help students
+ to decide whether to take this course or not. Some changes are possible
+ based on the (number of) students finally registered.</li>
+</ul>
+<hr>
+<h2 id="topics-covered-and-slides">Topics Covered and Slides <a id="handouts"></a></h2><a id="handouts">
+</a><h3 id="contents"><a id="handouts"></a><a href="https://karkare.github.io/cs664/CourseContents.html">Course Contents</a></h3>
+<p><i>The images/contents are used for teaching purpose and for fun. The
+ copyright remains with the original creator. If you suspect a copyright
+ violation, bring it to our notice and we will remove that 
+image/content.</i></p>
+<ol style="list-style-type: decimal">
+<li>Introduction &amp; Motivation [<a href="https://drive.google.com/file/d/1-01uabgSQcNEFCQHtbzT0oTFBMHZm-ap/view?usp=sharing">slides</a>] [<a href="#readingOne">Lecture 1 Reading Notes</a>]</li>
+<li>IoT Around Us [<a href="https://drive.google.com/open?id=1pWjlN-Hn6KJPkJ8nHsZQ9T-KKTlRRbYd">slides</a>] [<a href="#readingTwo">Lecture 2 Reading/Video Notes</a>]</li>
+<li>Sensors [<a href="https://drive.google.com/open?id=1hS5YbajNX1uPQI8HPpRDZSddQ3sadnRL">slides</a>] [<a href="#readingThree">Lecture 3 Reading Notes</a>]</li>
+<li>Multi-sensor Systems and Calibration [<a href="https://drive.google.com/open?id=1EH8eN3LP3VGzwROEHSZtC6A4pX_m1aqO">slides</a>] [<a href="#readingFour">Lecture 4 Reading Notes</a>]</li>
+<li>IoT System Overview [<a href="https://drive.google.com/open?id=1fuxWvl74e0kgTAbd5qI32CEDCN9qY29C">slides</a>]</li>	
+<li>Power management &amp; Batteries [<a href="https://drive.google.com/open?id=1mQLOWggd8klVBVbuaAKfAi2Sy2R5bVCN">slides</a>] [<a href="#readingSix">Lecture 6 Reading Notes</a>]</li>
+<li>Understanding Microprocessors [<a href="https://drive.google.com/open?id=1GlsY64nDDsKMY5MZT2ef4gSKWKj6RQuZ">slides</a>]</li>
+<li>Microprocessors for IoT Sensors: An Overview [<a href="https://drive.google.com/open?id=1iYzu6Yc_fklYHe7fR34Q7GiwKrtrLzRS">slides</a>] [<a href="#readingEight">Lecture 8 Reading Notes</a>]</li>
+<li>Microcontrollers for IoT Sensors: Resources and Processes [<a href="https://drive.google.com/open?id=1HODjY5QIUNaaJqyxfOPwCrTWwvKqBQzk">slides</a>] 
+  Clock Budgeting of an IoT Sensor Node [<a href="https://drive.google.com/open?id=1BeJMSNNK-5NQLCSWOMutRGtfLyvbMBu7">slides</a>][<a href="#readingNine">Lecture 9 Reading Notes</a>]</li>
+<li>Representation of Numbers [<a href="https://drive.google.com/open?id=13wpH9pK04pKq94CyFYYG7f7GnD4njVm5">slides</a>]
+</li><li>Networking and IoT [<a href="https://docs.google.com/presentation/d/1hdB4-UAwufAPe4HxHa-OWlwt-IieNOHkttiFtfJF0SY/edit?usp=sharing">slides</a>][<a href="#readingElvn">Lecture 11 Reading Notes</a>] 
+</li><li>Design review of certain aspects of oblu[<a href="#readingTwelve">Lecture 12 Reading/Video Notes</a>]<ul><li>Pedestrian Dead Reckoning [<a href="https://drive.google.com/open?id=1CtzetbsxHZ2ts9XdRChTKKybiK11irrR">slides</a>]</li>
+    <li>Case study: oblu's firmware design (framework only) [<a href="https://drive.google.com/open?id=15KOVEhiLj_A91SQIMuZw3CokpN7W7KN-">slides</a>]</li>
+    <li>Designing a non-standard communication i/f for an IoT sensor node [<a href="https://drive.google.com/open?id=1KNaA8aO4xI9qpEvnIWeSxQ-1Kw9Pxi7J">slides</a>]</li>
+    <li>oblu-Arduino based autonomous vehicle [<a href="https://drive.google.com/open?id=19G8X9OBtZp1F8JXelkRlO912qkHBDs8k">slides</a>]</li>
+</ul>
+</li><li>Big Data [<a href="https://drive.google.com/open?id=16jMQEIdTmIgSXa4EQAWiDvuTuY8J5gRMyVRCZDTx1ok">slides</a>] [<a href="https://docs.google.com/presentation/d/1eesvPOPN4ssF5W8nU0_LLRVdpFhSZAyBLr_kCv3adfY/edit?usp=sharing"> Interacting with HDFS</a>]</li>
+<li>Hadoop and MapReduce [<a href="https://docs.google.com/presentation/d/10nMscXdQApOLM9CDLQhbAmHh3XmPAPu5Jg2n_3W9q4c/edit?usp=sharing">slides</a>]</li>
+<li>Revisiting Arduino [<a href="https://drive.google.com/open?id=1G09WiohAEE_qBqKC6HEFrTmscnjemiIQ">slides</a>] [<a href="#readingFifteen">Lecture 15 Reading Notes</a>]</li>
+<li>An Introduction to Rasbperry Pi [<a href="https://drive.google.com/open?id=1PFajS3KjyMwyDNtNrKbuBjNNPPqUWf28">slides</a>] [<a href="#readingSixteen">Lecture 16 Reading Notes</a>] </li>
+</ol>
+<h2 id="labex">Lab exercises <a id="labex"></a></h2><a id="labex">
+<p>You are supposed to submit report on each lab experiment. The lab 
+report must include answers to the questions asked at the end of every 
+lab exercise.</p>
+</a><ol style="list-style-type: decimal"><a id="labex">
+</a><li><a id="labex"></a><a href="https://drive.google.com/open?id=1iC3Pakhub3ThQdofh68ACCDoU1Lb6qyV">Lab exercise 1a</a> (updated on June 11th, 2018; minor; updates highlighted in red.). Deadline: <strong>15th June, 2018</strong> . Submission through Canvas.</li>
+<li><a href="https://drive.google.com/open?id=17rQHwSCO8NDEegUzSgGjlJSHsQYpWGX_">Lab exercise 2</a> (updated on June 11th, 2018; minor; updated text in blue.). Deadline: <strong>15th June, 2018</strong> . Submission through Canvas.</li>
+<li><a href="https://drive.google.com/open?id=1Libn-He-NkRTg3JLY-5idaq5oh01hv2b">Lab exercise 3</a>. Deadline: <strong>22nd June, 2018</strong> . Submission through Canvas.</li>
+<li><a href="https://drive.google.com/open?id=1AfoB_GqcZeLRDvj4aLfbsWoBR2hDMmUD">Lab exercise 4</a>. Deadline: <strong>11th July, 2018</strong> . Submission through Canvas.</li>
+</ol>
+<p><a href="https://drive.google.com/open?id=1WF58b2pHUvOZ1q4cMyjGXikEeEhpDaHk">Hint for connecting oblu to WiFi network.</a></p>
+<p><a href="https://drive.google.com/open?id=1GNmfYpS_VaIj8ge8D4FoOjmXmMDrinKY">Overview of Atmel Studio Environment.</a></p>
+<p><a href="https://drive.google.com/open?id=1ZydEtPNxlh77PddwQpHnyDGMk5Oj7Q7V">Sample calibration file.</a></p>
+<p><a href="https://drive.google.com/open?id=1M7DprnZF1nFi5cxfLqsOYPM4lL3wEHww">Time differential demystified.</a></p>	
+<h2 id="assignments">Assignments <a id="assignments"></a></h2><a id="assignments">
+<p>There will be short assignments to give you a chance to apply the 
+lecture material. Assignments will have some programming tasks.</p>
+</a><ol style="list-style-type: decimal"><a id="assignments">
+</a><li><a id="assignments"></a><a href="https://karkare.github.io/cs664/A/CS664-HA01.pdf">Questions</a>. Deadline: <strong>30th May, 2018</strong> . Submission through Canvas.</li>
+<li><a href="https://drive.google.com/open?id=1JbdB8iXsqZwLd3qdbA4k3HJRKMpgQCcJ">Questions</a>. <a href="https://drive.google.com/open?id=1VIiLxPYOW3Msk8m-AQfpq_bsXz79XdwF">Solution</a>. Deadline: <strong>18th June, 2018</strong> . Submission through Canvas.</li>
+</ol>
+<h2 id="quizzes">Quizzes <a id="quizzes"></a></h2><a id="quizzes">
+<p>There will be short quizzes in classroom to encourage interaction.</p>
+</a><ol style="list-style-type: decimal"><a id="quizzes">
+</a><li><a id="quizzes"></a><a href="https://drive.google.com/open?id=1j2feqnYdGRrGnrs1KEGjV0I-BOfMvUBd">Quiz 1 with solution</a></li>
+	<li><a href="https://drive.google.com/open?id=1iqsfRI4dVUszu3wh5Om1wjRWapd4D3W3">Quiz 2</a> and its <a href="https://drive.google.com/open?id=1wOxaFR6gdYtsE0Gi5Q4P0UGz9YyFH1vZ"> solution</a></li>	
+</ol>
+<h2 id="quizzes">Endsemeter Exam<a id="quizzes"></a></h2><a id="quizzes">
+</a><ol style="list-style-type: decimal"><a id="quizzes">
+</a><li><a id="quizzes"></a><a href="https://drive.google.com/open?id=19r3bUl6M6GLdnliMphNs9xEnhzdaaOcC">Endsemester question paper</a></li>
+</ol>
+<hr>
+<h2 id="course-project">Course Project<a id="project"></a></h2><a id="project">
+</a><ul><a id="project">
+</a><li><a id="project"></a><a href="https://drive.google.com/open?id=1hCTJXhZD1R9rGxJTuJ_2AQxme3b6wJfI">Implementing dual foot-mounted configuration with oblu</a></li>
+</ul>
+	<p><i>Each group will be given one more WiFi enabled oblu board + battery + casing</i></p>
+<p><strong>References:</strong></p>
+<p><a href="https://drive.google.com/open?id=1T-gRIpCPfAYkC60Hd0flxpZ9Efm6oVto">Data fusion of dual foot-mounted INS to reduce the systematic heading drift</a> by Prateek G V, Girisha R, K V S Hari and Peter Handel</p>
+<p><a href="https://drive.google.com/open?id=1c04CWGTAfUzHT0wCtyeseT8j0tvQoeKa">Setting up WiFi (ESP8266) module</a></p>
+<p><a href="https://www.awseducate.com/Application?&amp;appType=Student&amp;inst=Indian%20Institute%20of%20Technology%20Kanpur">How to register on the AWS Educate program</a></p>
+<p>Some help on creating account on AWS Educate <a href="https://drive.google.com/open?id=1TCFLoi0pk51RtNjuLD12CE7f403A6NU_">AWS account creation guide</a> and <a href="https://drive.google.com/open?id=1XalgNfv5u-xYto_KcXenYmyRdzfJOXAf">AWS Educate student setup guide</a></p>
+<hr>
+<h3 id="evaluation-scheme">Evaluation Scheme <a id="eval"></a></h3><a id="eval">
+<p><strong>Tentative</strong></p>
+<table style="width:54%;">
+<colgroup>
+<col width="40%">
+<col width="13%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="left">Assignments</td>
+<td align="right">20%</td>
+</tr>
+<tr class="even">
+<td align="left">End semester exam</td>
+<td align="right">35%</td>
+</tr>
+<tr class="odd">
+<td align="left">Course Project</td>
+<td align="right">35%</td>
+</tr>
+<tr class="even">
+<td align="left">Class Interaction</td>
+<td align="right">10%</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</a><h2 id="reading-video-notes"><a id="eval">Reading / Video Notes and References</a><a id="reading"></a></h2><a id="reading">
+</a><h3 id="lecture-1"><a id="reading">Lecture 1 </a><a id="readingOne"></a></h3><a id="readingOne">
+</a><ol style="list-style-type: decimal"><a id="readingOne">
+</a><li><a id="readingOne"></a><a href="https://www.linkedin.com/pulse/pedestrian-dead-reckoning-simplified-amit-k-gupta-1">Pedestrian Dead Reckoning Simplfied!</a></li>
+<li><a href="https://www.linkedin.com/pulse/track-my-steps-amit-k-gupta">Track my steps</a></li>
+<li><a href="https://www.linkedin.com/pulse/continue-tracking-my-steps-amit-k-gupta">Continue tracking my steps</a></li>
+<li><a href="https://blog.hackster.io/oblu-a-shoe-mounted-indoor-positioning-system-97cdc87b92b">oblu - A Shoe-Mounted Indoor Positioning System by Jeremy S. Cook</a></li>
+<li><a href="https://researchmatters.in/mr/node/335">The OpenShoe Project: Tracking each step for safety</a></li>
+</ol>
+<h3 id="lecture-2">Lecture 2 <a id="readingTwo"></a></h3><a id="readingTwo">
+</a><ol style="list-style-type: decimal"><a id="readingTwo">
+</a><li><a id="readingTwo"></a><a href="https://youtu.be/W8kgdBMpyCE">Insurance Telemetics Video</a></li>
+<li><a href="https://karkare.github.io/cs664/A/Smart_Automotive_Nov_Dec_2016_PH.pdf">Smart Automotive</a></li>
+</ol>
+<h3 id="lecture-3">Lecture 3 <a id="readingThree"></a></h3><a id="readingThree">
+</a><ol style="list-style-type: decimal"><a id="readingThree">
+</a><li><a id="readingThree"></a><a href="https://www.linkedin.com/pulse/iot-sensors-calibration-whats-relation-amit-k-gupta">IoT, Sensors and Calibration - Whats the relation?</a></li>
+</ol>
+<h3 id="lecture-4">Lecture 4 <a id="readingFour"></a></h3><a id="readingFour">
+</a><ol style="list-style-type: decimal"><a id="readingFour">
+</a><li><a id="readingFour"></a><a href="https://www.sensorsmag.com/components/smart-sensors-fulfilling-promise-iot">Smart Sensors Fulfilling the Promise of the IoT by Marcellino Gemelli</a></li>
+<li><a href="https://www.linkedin.com/pulse/iot-sensors-calibration-whats-relation-amit-k-gupta">IoT, Sensors and Calibration - Whats the relation? by A K Gupta and S Bose</a></li>
+<li><a href="https://www.linkedin.com/pulse/story-shoe-mounted-iot-sensor-calibration-amit-k-gupta">Story of a Shoe-mounted IoT Sensor Calibration by A K Gupta and S Bose</a></li>
+<li><a href="https://www.slideshare.net/gt-silicon/inertial-sensor-array-calibration-made-easy">Aligning the Forces - Eliminating the Misalignments in IMU Arrays by J Nilsson, I Skog, and P Handel</a></li>
+<li><a href="https://www.slideshare.net/gt-silicon/longterm-performance-evaluation-of-a-footmounted-pedestrian-navigation-device">Long-term Performance Evaluation of a Foot-mounted Pedestrian Navigation Device by A K Gupta, I Skog and P Handel</a></li>
+<li><a href="http://www.openshoe.org/wp-content/uploads/2011/11/mimu_platform.pdf">An Open-source Multi Inertial Measurement Unit (MIMU) Platform by I Skog, J Nilsson and P Handel</a></li>
+<li><a href="https://www.invensense.com/wp-content/uploads/2015/02/MPU-6500-Datasheet2.pdf">Datasheet of Invensense MPU-6500 6-axis IMU</a></li>
+<li><a href="https://www.dropbox.com/s/o4ypvr53ay7xoh3/FullSizeRender.mov?dl=0">Positioning of surgical instrument with the array board (Video demo - 140 MB)</a></li>
+<li><a href="http://onbase.visole.net/base/Microsenor_2pp_v7b_v2_FINAL_HI_-2017-06-09-10-03-50.pdf">Brochure of CODMAN ICP Sensor</a></li>
+</ol>
+<h3 id="lecture-6">Lecture 6 <a id="readingSix"></a></h3><a id="readingSix">
+</a><ol style="list-style-type: decimal"><a id="readingSix">
+</a><li><a id="readingSix"></a><a href="http://batteryuniversity.com/">Battery University</a></li>
+</ol>
+<h3 id="lecture-8">Lecture 8 <a id="readingEight"></a></h3><a id="readingEight">
+</a><ol style="list-style-type: decimal"><a id="readingEight">
+</a><li><a id="readingEight">Microprocessor, Architecture, Programming, &amp; Applications with the 8085 by Ramesh Gaonkar</a></li>	
+<li><a href="https://drive.google.com/open?id=1TwyLx98smxtgg9XRyQsgenLtveIbt8Ws">AT32UC3C: Detailed specifications</a></li>
+<li><a href="https://drive.google.com/open?id=1BjGSrlGE1Kt2Ikd5_wjTZLkonuUzP0Pp">AT32UC3C: Architecture document</a></li>
+<li><a href="https://drive.google.com/open?id=1M2AnMnk3o6W83nsxlBxEfmIc2dJeN1_U">AT32UC3C: Technical reference manual</a></li>
+<li><a href="https://drive.google.com/open?id=15m7fTNxyHpVGKP55sRJxlzNI6_dsBYuA">AT32UC3C: Schematics (reference board design)</a></li>
+</ol>
+<h3 id="lecture-9">Lecture 9 <a id="readingNine"></a></h3><a id="readingNine">
+</a><ol style="list-style-type: decimal"><a id="readingNine">
+</a><li><a id="readingNine"></a><a href="https://drive.google.com/open?id=1YN6oEIv7I3s1rB1vYBjQYjbSjuJ0TM11">8257 Programmable DMA Controller</a></li>
+<li><a href="https://drive.google.com/open?id=1J5q5AvJP3Xh35tzxkFsT1o3E21iX19OJ">8259 Programmable Interrupt Controller</a></li>
+<li><a href="https://www.slideshare.net/gt-silicon/evolution-of-a-shoemounted-multiimu-pedestrian-dead-reckoning-pdr-sensor">On the noise and power performance of a shoe-mounted multi-IMU inertial positioning system by S Bose, A K Gupta and P Handel</a></li>
+<li><a href="https://s2.smu.edu/~dhoungninou/CSE-EE-5-7385/references/how-to-select-uC.pdf">How to select a microcontroller by J J Vaglica and P S Gilmour</a></li>
+<li><a href="https://www.edn.com/electronics-blogs/embedded-basics/4411480/1/10-steps-to-selecting-a-microcontroller">10 steps to selecting a microcontroller by J Beningo</a></li>
+</ol>
+
+<h3 id="lecture-11">Lecture 11 <a id="readingElvn"></a></h3><a id="readingElvn">
+</a><ol style="list-style-type: decimal"><a id="readingElvn">
+</a><li><a id="readingElvn"></a><a href="https://drive.google.com/open?id=1aG9Bpnt2E8HaITLGwxWFq8gOc_9qebqJ"> Python: File I/O, Exceptions, Modules</a></li>
+<li><a href="https://drive.google.com/open?id=1pIKuFzNyVar_aW4srS5IV-eIEqdZhDhz"> Python: Classes and OOP (with example scripts)</a></li> 	
+</ol>
+<h3 id="lecture-12">Lecture 12 <a id="readingTwelve"></a></h3><a id="readingTwelve">
+</a><ol style="list-style-type: decimal"><a id="readingTwelve">
+</a><li><a id="readingTwelve"></a><a href="https://www.slideshare.net/gt-silicon/foot-mounted-pedestrian-navigation-systems">Design reference (A project report submitted by students of SNU, Noida)</a></li>
+<li>Section I and II of <a href="https://www.slideshare.net/gt-silicon/longterm-performance-evaluation-of-a-footmounted-pedestrian-navigation-device">Long-term Performance Evaluation of a Foot-mounted Pedestrian Navigation Device by A K Gupta, I Skog and P Handel</a></li>
+<li><a href="https://www.youtube.com/watch?v=c1bYfUYlVSo"> Video demo: Robot pre-programmed with path to navigate</a></li>
+<li><a href="https://www.youtube.com/watch?v=9c2yeqhoBvo"> Video demo: Robot path programmed by Android phone</a></li> 	
+<li><a href="https://www.youtube.com/watch?v=YsL54ehzo2E"> Video demo: Robot receiving path on-the-fly from another oblu attached to shoe</a></li> 
+</ol>
+<h3 id="lecture-15">Lecture 15 <a id="readingFifteen"></a></h3><a id="readingFifteen">
+</a><ol style="list-style-type: decimal"><a id="readingFifteen">
+</a><li><a id="readingFifteen"></a><a href="https://store.arduino.cc/usa/arduino-mega-2560-rev3">Official webpage of Arduino Mega 2560 Rev3</a></li>
+<li><a href="http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-2549-8-bit-AVR-Microcontroller-ATmega640-1280-1281-2560-2561_datasheet.pdf">Data sheet of ATmega2560</a></li> 	
+<li><a href="https://www.microchip.com/wwwproducts/en/ATmega2560">Official webpage of ATmega2560</a></li> 
+</ol>
+<h3 id="lecture-16">Lecture 16 <a id="readingSixteen"></a></h3><a id="readingSixteen">
+</a><ol style="list-style-type: decimal"><a id="readingSixteen">
+</a><li><a id="readingSixteen"></a><a href="https://www.raspberrypi.org/products/raspberry-pi-3-model-b-plus/">Official webpage of Raspberry Pi 3 Model B+</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Raspberry_Pi">Wikipedia entry of Raspberry Pi</a></li> 	
+</ol>
+
+<h2 id="references">References <a id="reference"></a></h2><a id="reference">
+<p>There is no textbook for the course. The following material will be used for reference.</p>
+</a><ul><a id="reference">
+<li><p>Internet of Things: A Hands-on Approach, By Arshdeep Bahga and Vijay Madisetti</p></li>
+<li><p>Introduction to Embedded Systems: A Cyber-Physical Systems Approach, By Edward Ashford Lee and Sanjit Arunkumar Seshia</p></li>
+<li><p>Introduction to Computation and Programming using Python, by John Guttag</p></li>
+<li><p>Python documentation: https://www.python.org/doc/</p></li>
+<li><p>Android developer: https://developer.android.com/training/index.html</p></li>
+</a><li><a id="reference"></a><p><a id="reference"></a><a href="https://www.tindie.com/products/obluIoT/oblu-a-shoe-mounted-indoor-gps/">oblu - A Shoe Mounted Indoor GPS (A comprehensive note on oblu)</a></p></li>
+<li><p>Recent publications for case studies</p></li>
+</ul>
+<hr>
+<h3 id="take-me-to-the-top">Take me to the <a href="#top">Top</a></h3>
+
+
+</body></html>
